@@ -1,0 +1,6 @@
+#dependencias
+pandas
+numpy
+scikit-learn
+lime
+joblib
