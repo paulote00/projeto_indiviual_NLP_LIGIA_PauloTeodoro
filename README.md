@@ -22,18 +22,22 @@ A abordagem técnica foi definida considerando restrições de tempo e recursos 
 ## Instruções de Execução e Reprodutibilidade
 Para reproduzir os resultados submetidos ao Kaggle e gerar as análises de interpretabilidade, siga as etapas abaixo:
 
-1. Instalação das Dependências
+1. Instalação das Dependências:
+
 Certifique-se de ter o Python instalado e execute o seguinte comando no terminal para instalar os pacotes necessários:
 `pip install -r requirements.txt`
 
-2. Download dos Dados
+2. Download dos Dados:
+
 Acesse a página da competição no Kaggle e faça o download dos arquivos `train.csv` e `test.csv`. Posicione ambos os arquivos no mesmo diretório em que se encontra o arquivo `main.py`.
 
-3. Execução do Pipeline
+3. Execução do Pipeline:
+
 Rode o script principal através do terminal ou do seu ambiente de desenvolvimento:
 `python main.py`
 
-4. Saídas Esperadas
+4. Saídas Esperadas:
+
 A execução do script completará as seguintes rotinas automaticamente:
 * Treinamento do modelo.
 * Exibição das métricas de F1-Score e Matriz de Confusão no console.
