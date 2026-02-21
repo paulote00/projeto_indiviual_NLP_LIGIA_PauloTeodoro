@@ -30,5 +30,6 @@ Para garantir a reprodutibilidade e portabilidade da solução, os seguintes arq
 1. Instale as dependências: `pip install -r requirements.txt`.
 2. Certifique-se de que os arquivos `train.csv` e `test.csv` estão na raiz do projeto.
 3. Execute os notebooks na ordem: `01` -> `02` -> `03`.
+Ps. Caso opte por usar a versão unificada, é necessario somente executar uma célula do notebook.
 
 **Best Score Alcançado: 0.98560**
