@@ -1,5 +1,7 @@
 # Desafio Técnico Individual - Ligia (Trilha NLP)
 
+>  **Leia o artigo técnico completo:** [Download do Relatório em PDF] https://drive.google.com/drive/folders/1DUzmCCUCujapgMQRtwDJQ0O87lFXxiR8?usp=sharing.
+
 ## Descrição do Projeto
 Este repositório contém a solução desenvolvida para o Desafio Técnico Individual do processo seletivo da Liga Acadêmica de Inteligência Artificial (Ligia) da Universidade Federal de Pernambuco (UFPE). O projeto integra a trilha de Processamento de Linguagem Natural (PLN).
 
