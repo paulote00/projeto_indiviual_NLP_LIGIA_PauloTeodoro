@@ -3,39 +3,30 @@
 ## Descrição do Projeto
 Este repositório contém a solução desenvolvida para o Desafio Técnico Individual do processo seletivo da Liga Acadêmica de Inteligência Artificial (Ligia) da Universidade Federal de Pernambuco (UFPE). O projeto integra a trilha de Processamento de Linguagem Natural (PLN).
 
-O objetivo central é a classificação de textos para distinguir conteúdos informativos legítimos de materiais de desinformação (Fake News), utilizando análise de dados textuais não estruturados. A solução desenvolvida prioriza o desempenho preditivo aliado à interpretabilidade, evitando modelos de caixa-preta.
+O objetivo central é a classificação de textos para distinguir conteúdos informativos legítimos de materiais de desinformação (Fake News), utilizando análise de dados textuais não estruturados. A solução desenvolvida prioriza o desempenho preditivo aliado à interpretabilidade, evitando modelos de "caixa-preta" através do uso de modelos lineares explicáveis e técnicas de XAI.
 
-## Estrutura do Repositório
-A organização do código atende aos requisitos de clareza, modularidade e reprodutibilidade exigidos pela comissão avaliadora:
+## Estrutura do Repositório e Modularização
+Seguindo as orientações da comissão avaliadora para garantir as melhores práticas de Engenharia de Software e modularidade, o pipeline foi dividido em três etapas principais:
 
-* `paulo-teodoro-nlp-ligia-project.ipynb`: Notebook principal contendo o pipeline completo de execução. Ele engloba a preparação dos dados, vetorização, treinamento do modelo, validação interna e inferência.
-* `requirements.txt`: Arquivo contendo a lista exata de dependências e bibliotecas necessárias para a execução do projeto de ponta a ponta.
-* `modelo_fake_news.pkl`: Artefato do modelo final treinado e serializado, utilizado para a geração das previsões.
+* **01_aed_paulo_teodoro.ipynb**: Notebook dedicado à Análise Exploratória de Dados (AED). Foca na compreensão da distribuição das classes, estatísticas de texto e identificação de padrões linguísticos preliminares.
+* **02_treinamento_paulo_teodoro.ipynb**: O núcleo do projeto. Contém o pipeline de pré-processamento, vetorização TF-IDF (unigramas e bigramas) e o treinamento da Regressão Logística. Este notebook é responsável por gerar os artefatos de serialização.
+* **03_inferencia_paulo_teodoro.ipynb**: Script otimizado para produção. Ele carrega os pesos já treinados e o vetorizador para realizar predições rápidas no conjunto de teste, gerando o arquivo final para o Kaggle sem necessidade de re-treinamento.
+* **paulo-teodoro-nlp-ligia-project.ipynb**: Notebook unificado contendo o histórico completo do desenvolvimento.
 
-## Metodologia e Modelagem
-A abordagem técnica foi definida considerando restrições de tempo e recursos computacionais, garantindo alta eficiência:
-* Vetorização: Transformação dos textos em representações numéricas utilizando `TfidfVectorizer`, processando a concatenação das colunas de título e corpo da notícia com extração de unigramas e bigramas (`ngram_range=(1, 2)`) para maximizar o contexto semântico.
-* Classificação: Treinamento de um algoritmo de Regressão Logística parametrizado com ajuste de regularização (`C=10`), balanceamento de classes (`class_weight='balanced'`) e semente fixa (`random_state=42`) para mitigar vieses e garantir integridade científica.
-* Avaliação: O modelo foi otimizado e avaliado com base na métrica F1-Score (Macro Average), conforme diretriz da competição.
-* Interpretabilidade (XAI): Aplicação da técnica LIME (Local Interpretable Model-agnostic Explanations) para explicar os fatores e padrões linguísticos que influenciam as decisões do modelo, justificando o seu comportamento.
+## Artefatos de Modelo (Pesos e Serialização)
+Para garantir a reprodutibilidade e portabilidade da solução, os seguintes arquivos de "pesos" são fornecidos:
 
-## Instruções de Execução e Reprodutibilidade
-Para reproduzir os resultados submetidos ao Kaggle e gerar as análises de interpretabilidade, siga as etapas abaixo:
+* **modelo_fake_news.pkl**: Arquivo serializado via `joblib` que contém os **pesos (coeficientes)** aprendidos pelo modelo de Regressão Logística durante a fase de treinamento. Ele representa o estado final da inteligência do classificador.
+* **vectorizer.pkl**: Contém o estado do `TfidfVectorizer`. É obrigatório para a inferência, pois garante que as novas palavras sejam mapeadas para os mesmos índices numéricos utilizados no treino.
 
-1. Instalação das Dependências:
-Certifique-se de ter o Python instalado e execute o seguinte comando no terminal para instalar os pacotes necessários:
-`pip install -r requirements.txt`
+## Metodologia Técnica
+* **Vetorização**: Extração de unigramas e bigramas (`ngram_range=(1, 2)`) para capturar o contexto de expressões compostas.
+* **Classificação**: Regressão Logística com regularização `C=10` e `class_weight='balanced'` para lidar com eventuais desequilíbrios nas classes.
+* **Explicabilidade**: Uso da técnica LIME para fornecer transparência sobre quais termos influenciaram cada predição.
 
-2. Download dos Dados:
-Acesse a página da competição no Kaggle e faça o download dos arquivos `train.csv` e `test.csv`. Posicione ambos os arquivos no mesmo diretório em que se encontra o arquivo do notebook.
+## Instruções de Execução
+1. Instale as dependências: `pip install -r requirements.txt`.
+2. Certifique-se de que os arquivos `train.csv` e `test.csv` estão na raiz do projeto.
+3. Execute os notebooks na ordem: `01` -> `02` -> `03`.
 
-3. Execução do Pipeline:
-Como o código foi estruturado em um Jupyter Notebook (.ipynb), você pode reproduzi-lo abrindo o arquivo `paulo-teodoro-nlp-ligia-project.ipynb` em seu ambiente de preferência (Jupyter, VS Code, Google Colab ou Kaggle) e executando as células sequencialmente.
-
-4. Saídas Esperadas:
-A execução do script completará as seguintes rotinas automaticamente:
-* Treinamento do modelo.
-* Exibição das métricas de F1-Score e Matriz de Confusão no console.
-* Geração e salvamento dos relatórios visuais de explicabilidade (LIME) em formato `.html`.
-* Geração do arquivo `submission.csv` contendo as previsões formatadas para submissão na plataforma Kaggle.
-* Serialização e atualização do arquivo `modelo_fake_news.pkl`.
+**Best Score Alcançado: 0.98560**
